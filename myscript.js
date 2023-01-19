@@ -7,6 +7,9 @@ setInterval(() => {
     
 }, 1000);
 
+const audio = new Audio();
+audio.src = "./assets/beep.mp3";
+
 
 // <div class="card pt-5 mx-auto">
                 // <ul id="order-summary" class="list-unstyled">
@@ -14,15 +17,22 @@ setInterval(() => {
                 // </ul>
            // </div> 
 
+
+const orderitemsarray = [];
+const orderpricearray = [];
 const orderarray = [];
 
-function orderbasket(itemname, itemprice, itemimage) {
-orderarray.push(itemname, itemprice, itemimage);
+function orderbasket(itemname, itemprice) {
+
+orderitemsarray.push (itemname);
+orderpricearray.push (itemprice);
+orderarray.push (itemname, itemprice);
 
 
-const orderlist = document.getElementById('orderlist');
+let orderlist = document.getElementById('orderlist');
 
-const orderitem = document.createElement('li');
+const orderitem = document.createElement('li'); 
+orderitem.className = 'd-flex justify-content-between align-items-center ms-2 me-2'; 
 
 const orderitempricespan = document.createElement('span');
 
@@ -39,16 +49,30 @@ orderitem.appendChild(orderitempricespan);
 
 orderlist.appendChild(orderitem);
 
-const orderitemimgtag = document.createElement('img');
-
-orderitemimgtag.src = itemimage;
-
-orderitemimgtag.className = 'w-25 rounded m-2';
-
-orderlist.appendChild(orderitemimgtag);
-
-};
+}
 
 function totalitems() {
-    console.log(orderarray.length);
+    document.getElementById("totalitems").innerText = orderarray.length;
 };
+
+function costitems() {
+    if (orderpricearray.length === 0) {
+        document.getElementById("totalcost").innerText = 0;
+    }
+    else {
+    document.getElementById("totalcost").innerText = orderpricearray.reduce(sumarray).toFixed(2);
+    function sumarray(total, sum){
+        return total + sum;
+    };
+};
+};
+
+function orderbasketclear() {
+    let orderlist = document.getElementById('orderlist');
+    orderlist.innerHTML = "";
+    orderitemsarray.length = 0;
+    orderpricearray.length = 0;
+    orderarray.length = 0;
+    totalitems();
+    costitems ();
+}

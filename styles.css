@@ -31,3 +31,7 @@
     overflow: hidden;
     overflow-y: scroll ;
 }
+
+#noitems {
+   visibility:  hidden ;
+}
