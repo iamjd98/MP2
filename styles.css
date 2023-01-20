@@ -26,8 +26,8 @@
     overflow-y: scroll ;
 }
 
-.selected-items {
-    max-height: 560px;
+#orderlist {
+    max-height: 50vh;
     overflow: hidden;
     overflow-y: scroll ;
 }
