@@ -1,3 +1,5 @@
+const e = require("express");
+
 let time = document.getElementById("current-time"); 
 
 setInterval(() => {
@@ -11,12 +13,6 @@ const audio = new Audio();
 audio.src = "./assets/beep.mp3";
 
 
-// <div class="card pt-5 mx-auto">
-                // <ul id="order-summary" class="list-unstyled">
-                    // <li><img class="m-2" src="./assets/lechon_belly.jpg" alt="lechon Belly" style="width: 20%; height: 20%;"> <span class="fw-bold">Lechon Belly</span>  <span class="fw-bold text-danger">P369</span></li>
-                // </ul>
-           // </div> 
-
 const orderidarray = [];
 const orderitemsarray = [];
 const orderpricearray = [];
@@ -24,7 +20,7 @@ const orderarray = [];
 
 let i = 0;
 
-function orderbasket(itemname, itemprice) {
+function orderbasket (itemname, itemprice) {
     
 
 orderidarray.push(i);    
@@ -126,7 +122,33 @@ function deleteitem(orderid, button){
     console.log(button.parentElement);
     orderlist.removeChild(button.parentElement);
 
-    if (orderpricearray,length === 0) {
+    if (orderpricearray.length === 0) {
         document.getElementById('amount').value = 0;
     }
 }
+
+
+function calculatorpress(number){
+        const calculatorscreendisplay = document.getElementById('calculatorscreen');
+        console.log(calculatorscreendisplay.length);
+        if (calculatorscreendisplay.value == 0 && number == '00') {
+            calculatorscreendisplay = '0.';
+        } else if (calculatorscreendisplay.value == 0 && number == '0') {
+            calculatorscreendisplay = '0.';
+        } else if (calculatorscreendisplay.value == '' && number == '00') {
+            calculatorscreendisplay.value = '0';
+        } else if (calculatorscreendisplay.value.includes('.') === true && number =='.') {
+            calculatorscreendisplay.value = calculatorscreendisplay.value;
+        } else {
+        calculatorscreendisplay.value += number;
+        }
+
+        if (calculatorscreendisplay.value == '.') {
+            calculatorscreendisplay.value = '0.';
+        }
+};
+
+
+function calculatorcancel () {
+    calculatorscreen.value = '';
+};
